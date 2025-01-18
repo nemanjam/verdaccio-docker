@@ -1,0 +1,21 @@
+auth:
+  htpasswd:
+    file: /verdaccio/conf/htpasswd
+    max_users: 100
+
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+
+packages:
+  '@*/*':
+    access: $authenticated
+    publish: admin
+  '**':
+    access: $authenticated
+    publish: admin
+
+users:
+  admin:
+    password: your-secure-password
+    email: admin@example.com

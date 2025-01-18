@@ -1,0 +1,38 @@
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+  github:
+    url: https://npm.pkg.github.com/
+    headers:
+      Authorization: "Bearer GITHUB_PERSONAL_ACCESS_TOKEN" # Replace with your GitHub token
+
+packages:
+"@fleek-platform-(test|local)/*":
+    access: $authenticated
+    publish: $authenticated
+    proxy: none # Ensure these packages are stored and resolved locally
+
+  "@fleek-platform/*":
+    access: $authenticated
+    publish: admin
+    proxy: github
+
+  "**":
+    access: $authenticated
+    publish: admin
+    proxy: npmjs
+
+auth:
+  htpasswd:
+    max_users: 100
+
+users:
+  admin:
+    password: your-secure-password # Replace with your password
+    email: admin@example.com
+    roles:
+      - admin # Define the admin role explicitly
+
+middlewares:
+  audit:
+    enabled: true

@@ -8,7 +8,8 @@ services:
     ports:
       - "4873:4873"
     volumes:
-      - ./config:/verdaccio/conf 
+      - ./config/config-base.yaml:/verdaccio/conf/config.yaml
+      # - ./config/config-routed.yaml:/verdaccio/conf/config.yaml
       - ./storage:/verdaccio/storage 
     environment:
       - VERDACCIO_APPDIR=/verdaccio
